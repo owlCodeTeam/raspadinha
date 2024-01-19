@@ -11,20 +11,19 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
 import {ScratchCard, SCRATCH_TYPE} from 'scratchcard-js'
+import frontScratchCardImage from '../../public/assets/front-scratch-card.jpeg'
 
 export default defineComponent({
   name: 'ScratchCard',
   setup() {
     onMounted(() => {
       const scratchCard = document.getElementById('scratch-card')
-      console.log(scratchCard?.offsetHeight)
-      console.log(scratchCard?.offsetWidth)
 
       const scratch = new ScratchCard("#scratch-card", {
         scratchType: SCRATCH_TYPE.LINE,
         containerWidth: 300,
         containerHeight: 300,
-        imageForwardSrc: 'https://i.guim.co.uk/img/media/fe1e34da640c5c56ed16f76ce6f994fa9343d09d/0_174_3408_2046/master/3408.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=67773a9d419786091c958b2ad08eae5e',
+        imageForwardSrc: frontScratchCardImage,
         imageBackgroundSrc: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg',
         brushSrc: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg',
         clearZoneRadius: 30,
