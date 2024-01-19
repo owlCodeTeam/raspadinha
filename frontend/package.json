@@ -19,7 +19,8 @@
     "quasar": "^2.8.0",
     "scratchcard-js": "^1.5.5",
     "vue": "^3.2.29",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue3-qr-reader": "^1.0.0"
   },
   "devDependencies": {
     "@quasar/app-vite": "^1.4.3",
