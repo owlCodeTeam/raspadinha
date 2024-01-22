@@ -1,4 +1,4 @@
-import { RegisterGateway } from '@modules/Auth/infra/Register/gateway/registerGatewayLocal.local';
+import { RegisterGatewayLocal } from '@modules/Auth/infra/Register/gateway/registerGatewayLocal.local';
 import { userRepositoryInterface } from '../userRepositoryInterface.interface';
 import { userEntity } from '../entity/userEntity.entity';
 import { apiError } from '../../../../../http/helpers/api-Error.helper';
@@ -14,7 +14,7 @@ export type saveUserInput = {
 export class saveUserUsecase {
   constructor(
     readonly repo: userRepositoryInterface,
-    readonly gateway: RegisterGateway,
+    readonly gateway: RegisterGatewayLocal,
     readonly emailGateway: RegisterEmailQueueInterface,
   ) {}
   public async execute(user: saveUserInput): Promise<userEntity> {
@@ -23,17 +23,13 @@ export class saveUserUsecase {
       throw new apiError('Cpf inválido', 400, 'invalid_item');
     } else if ((await this.gateway.validateEmail(user.email)) === false) {
       throw new apiError('Email inválido', 400, 'invalid_item');
-    } else if (userDb && userDb.is_verify() === true) {
+    } else if (userDb.props && userDb.is_verify() === true) {
       throw new apiError('Email já existe', 400, 'invalid_item');
-    } else if (userDb && userDb.is_verify() === false) {
-      throw new apiError(
-        'Você ja cadastrou sua conta, mas ainda não a verificou,  use o toke de autenticação para verifica-lá',
-        401,
-        'item_already_exist',
-      );
+    } else if (userDb.props && userDb.is_verify() === false) {
+      throw new apiError('Você ja cadastrou sua conta, mas ainda não a verificou,  use o toke de autenticação para verifica-lá', 401, 'item_already_exist');
     }
     const userInput = new userEntity({
-      cpf: user.cpf,
+      cpf: user.cpf.replace(/[\s.-]*/gim, ''),
       email: user.email,
       password: await this.gateway.encryptPassword(user.password),
       name: user.name,

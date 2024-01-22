@@ -1,17 +1,17 @@
 import dataSource from '@modules/shared/infra/database/datasource';
 import { saveUserUsecase } from '../../usecase/saveUserUsecase.usecase';
 import { RegisterRpositoryTypeOrm } from '@modules/Auth/infra/Register/repository/registerRepositoryTypeOrm.orm';
-import { RegisterGateway } from '@modules/Auth/infra/Register/gateway/registerGatewayLocal.local';
+import { RegisterGatewayLocal } from '@modules/Auth/infra/Register/gateway/registerGatewayLocal.local';
 import { UserModel } from '@modules/Auth/infra/database/models/userModel.model';
 import { registerEmailQueueMemory } from '@modules/Auth/infra/Register/queue/registerEmailQueue.memory.rabbitmq';
 
 let repo: RegisterRpositoryTypeOrm;
-let gateway: RegisterGateway;
+let gateway: RegisterGatewayLocal;
 let emailGateway: registerEmailQueueMemory;
 describe('Deve testar o saveUserUsecase', () => {
   beforeAll(async () => {
     repo = new RegisterRpositoryTypeOrm(dataSource);
-    gateway = new RegisterGateway(dataSource);
+    gateway = new RegisterGatewayLocal(dataSource);
     emailGateway = new registerEmailQueueMemory();
     await dataSource.initialize();
   });
@@ -27,22 +27,13 @@ describe('Deve testar o saveUserUsecase', () => {
       password: '123456',
     };
     await action.execute(user);
-    const userDb = await dataSource
-      .getRepository(UserModel)
-      .createQueryBuilder()
-      .where(' email = :email', { email: user.email })
-      .getOne();
+    const userDb = await dataSource.getRepository(UserModel).createQueryBuilder().where(' email = :email', { email: user.email }).getOne();
 
     expect(userDb.email).toBe(user.email);
     expect(userDb.name).toBe(user.name);
     expect(userDb.cpf).toBe('28878492558');
 
-    await dataSource
-      .createQueryBuilder()
-      .delete()
-      .from(UserModel)
-      .where('uuid = :uuid', { uuid: userDb.uuid })
-      .execute();
+    await dataSource.createQueryBuilder().delete().from(UserModel).where('uuid = :uuid', { uuid: userDb.uuid }).execute();
   });
   test('Deve emitir um erro de cpf inválido', async () => {
     const action = new saveUserUsecase(repo, gateway, emailGateway);
@@ -90,8 +81,6 @@ describe('Deve testar o saveUserUsecase', () => {
     };
     await expect(async () => {
       await action.execute(user);
-    }).rejects.toThrow(
-      'Você ja cadastrou sua conta, mas ainda não a verificou,  use o toke de autenticação para verifica-lá',
-    );
+    }).rejects.toThrow('Você ja cadastrou sua conta, mas ainda não a verificou,  use o toke de autenticação para verifica-lá');
   });
 });

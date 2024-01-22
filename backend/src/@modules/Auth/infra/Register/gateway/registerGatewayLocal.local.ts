@@ -6,7 +6,7 @@ import { userEntity } from '@modules/Auth/core/Register/entity/userEntity.entity
 import { apiError } from '../../../../../http/helpers/api-Error.helper';
 const segredo = '3cba50ad-324e-4f26-9bb9-3304bfc2c30e';
 
-export class RegisterGateway implements userGatewayInterface {
+export class RegisterGatewayLocal implements userGatewayInterface {
   constructor(dataSource: DataSource) {}
   async validateCpf_cnpj(input: string): Promise<boolean> {
     if (input.replace(/[\s.-]*/gim, '').length === 11) {
@@ -30,14 +30,12 @@ export class RegisterGateway implements userGatewayInterface {
       }
       let soma = 0;
       let resto;
-      for (let i = 1; i <= 9; i++)
-        soma = soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
+      for (let i = 1; i <= 9; i++) soma = soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
       resto = (soma * 10) % 11;
       if (resto == 10 || resto == 11) resto = 0;
       if (resto != parseInt(cpf.substring(9, 10))) return false;
       soma = 0;
-      for (let i = 1; i <= 10; i++)
-        soma = soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+      for (let i = 1; i <= 10; i++) soma = soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
       resto = (soma * 10) % 11;
       if (resto == 10 || resto == 11) resto = 0;
       if (resto != parseInt(cpf.substring(10, 11))) return false;
@@ -55,8 +53,7 @@ export class RegisterGateway implements userGatewayInterface {
         if (pos < 2) pos = 9;
       }
       let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-      if (resultado !== parseInt(digitosVerificadores.charAt(0), 10))
-        return false;
+      if (resultado !== parseInt(digitosVerificadores.charAt(0), 10)) return false;
 
       tamanhoTotal = tamanhoTotal + 1;
       cnpjSemDigitos = cnpj.substring(0, tamanhoTotal);
@@ -69,8 +66,7 @@ export class RegisterGateway implements userGatewayInterface {
       }
 
       resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-      if (resultado !== parseInt(digitosVerificadores.charAt(1), 10))
-        return false;
+      if (resultado !== parseInt(digitosVerificadores.charAt(1), 10)) return false;
 
       return true;
     }

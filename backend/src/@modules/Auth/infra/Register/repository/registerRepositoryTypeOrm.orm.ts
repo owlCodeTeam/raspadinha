@@ -23,20 +23,12 @@ export class RegisterRpositoryTypeOrm implements userRepositoryInterface {
     return user;
   }
   async getUserByEmail(email: string): Promise<userEntity> {
-    const userDb = await this.dataSource
-      .getRepository(UserModel)
-      .createQueryBuilder()
-      .where('email = :email', { email: email })
-      .getOne();
+    const userDb = await this.dataSource.getRepository(UserModel).createQueryBuilder().where('email = :email', { email: email }).getOne();
     const responseUser = new userEntity(userDb);
     return responseUser;
   }
   async getUserByUuid(uuid: string): Promise<userEntity> {
-    const userDb = await this.dataSource
-      .getRepository(UserModel)
-      .createQueryBuilder()
-      .where('uuid = :uuid', { uuid: uuid })
-      .getOne();
+    const userDb = await this.dataSource.getRepository(UserModel).createQueryBuilder().where('uuid = :uuid', { uuid: uuid }).getOne();
     const responseUser = new userEntity(userDb);
     return responseUser;
   }

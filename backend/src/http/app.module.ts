@@ -4,6 +4,7 @@ import { AppController } from './controllers/app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 import { UserModel } from '@modules/Auth/infra/database/models/userModel.model';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -22,6 +23,7 @@ import { UserModel } from '@modules/Auth/infra/database/models/userModel.model';
     RabbitMQModule.forRoot(RabbitMQModule, {
       uri: 'amqp://admin:admin@rabbitmq:5672',
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [],

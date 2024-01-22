@@ -3,6 +3,7 @@ import { AppModule } from './http/app.module';
 import { json, urlencoded } from 'express';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AuthModule } from './http/auth/auth.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,13 +18,10 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('Auth')
     .addTag('Profile')
-    .addBearerAuth(
-      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT', in: 'header' },
-      'Authorization',
-    )
+    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT', in: 'header' }, 'Authorization')
     .build();
   const swaggerDoc = SwaggerModule.createDocument(app, swaggerConfig, {
-    include: [AppModule],
+    include: [AppModule, AuthModule],
   });
   SwaggerModule.setup('doc', app, swaggerDoc);
   await app.listen(3000);
