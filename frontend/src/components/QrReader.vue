@@ -1,10 +1,27 @@
 <template>
-  <div>My component</div>
+  <div>
+    <QrcodeStream 
+      @detect="onDecode"
+    ></QrcodeStream>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script>
+import { defineComponent } from 'vue';
+import { QrcodeStream } from 'vue-qrcode-reader';
+
 export default defineComponent({
-  name: 'QrReader'
-})
+  name: 'IndexPage',
+  components: { QrcodeStream },
+  setup() {
+    function onDecode(data) {
+      console.log('detectado')
+      console.log(data)
+    }
+
+    return {
+      onDecode
+    }
+  }
+});
 </script>
