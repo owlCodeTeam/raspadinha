@@ -1,5 +1,5 @@
-import { userEntity } from '@modules/Auth/core/Register/entity/userEntity.entity';
-import { userRepositoryInterface } from '@modules/Auth/core/Register/userRepositoryInterface.interface';
+import { userEntity } from '@modules/Auth/core/user/Register/entity/userEntity.entity';
+import { userRepositoryInterface } from '@modules/Auth/core/user/Register/userRepositoryInterface.interface';
 import { DataSource } from 'typeorm';
 import { UserModel } from '../../database/models/userModel.model';
 

@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './controllers/app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
-import { UserModel } from '@modules/Auth/infra/database/models/userModel.model';
+import { UserModel } from '@modules/Auth/infra/user/database/models/userModel.model';
 import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [

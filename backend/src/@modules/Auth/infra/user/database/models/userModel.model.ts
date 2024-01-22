@@ -1,11 +1,4 @@
-import {
-  DeleteDateColumn,
-  UpdateDateColumn,
-  CreateDateColumn,
-  Entity,
-  PrimaryColumn,
-  Column,
-} from 'typeorm';
+import { DeleteDateColumn, UpdateDateColumn, CreateDateColumn, Entity, PrimaryColumn, Column } from 'typeorm';
 
 @Entity('auth_users')
 export class UserModel {

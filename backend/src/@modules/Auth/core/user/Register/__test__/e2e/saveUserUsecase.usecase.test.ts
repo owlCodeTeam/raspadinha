@@ -1,9 +1,9 @@
 import dataSource from '@modules/shared/infra/database/datasource';
 import { saveUserUsecase } from '../../usecase/saveUserUsecase.usecase';
-import { RegisterRpositoryTypeOrm } from '@modules/Auth/infra/Register/repository/registerRepositoryTypeOrm.orm';
-import { RegisterGatewayLocal } from '@modules/Auth/infra/Register/gateway/registerGatewayLocal.local';
-import { UserModel } from '@modules/Auth/infra/database/models/userModel.model';
-import { registerEmailQueueMemory } from '@modules/Auth/infra/Register/queue/registerEmailQueue.memory.rabbitmq';
+import { RegisterRpositoryTypeOrm } from '@modules/Auth/infra/user/Register/repository/registerRepositoryTypeOrm.orm';
+import { RegisterGatewayLocal } from '@modules/Auth/infra/user/Register/gateway/registerGatewayLocal.local';
+import { UserModel } from '@modules/Auth/infra/user/database/models/userModel.model';
+import { registerEmailQueueMemory } from '@modules/Auth/infra/user/Register/queue/registerEmailQueue.memory.rabbitmq';
 
 let repo: RegisterRpositoryTypeOrm;
 let gateway: RegisterGatewayLocal;

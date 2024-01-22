@@ -1,4 +1,4 @@
-import { UserSeeder } from '../../../Auth/infra/database/seeds/userSeed.seeder';
+import { UserSeeder } from '../../../Auth/infra/user/database/seeds/userSeed.seeder';
 import { DataSource } from 'typeorm';
 import { Seeder, SeederFactoryManager, runSeeder } from 'typeorm-extension';
 export class MainSeeder implements Seeder {

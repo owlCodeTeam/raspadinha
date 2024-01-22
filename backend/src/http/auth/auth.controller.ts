@@ -1,10 +1,10 @@
-import { RegisterRpositoryTypeOrm } from '@modules/Auth/infra/Register/repository/registerRepositoryTypeOrm.orm';
+import { RegisterRpositoryTypeOrm } from '@modules/Auth/infra/user/Register/repository/registerRepositoryTypeOrm.orm';
 import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthRegisterUserRequestDto } from './authRegister.request.dto';
-import { saveUserUsecase } from '@modules/Auth/core/Register/usecase/saveUserUsecase.usecase';
-import { RegisterEmailQueue } from '@modules/Auth/infra/Register/queue/registerEmailQueue.rabbitmq';
-import { RegisterGatewayLocal } from '@modules/Auth/infra/Register/gateway/registerGatewayLocal.local';
+import { saveUserUsecase } from '@modules/Auth/core/user/Register/usecase/saveUserUsecase.usecase';
+import { RegisterEmailQueue } from '@modules/Auth/infra/user/Register/queue/registerEmailQueue.rabbitmq';
+import { RegisterGatewayLocal } from '@modules/Auth/infra/user/Register/gateway/registerGatewayLocal.local';
 
 @ApiTags('Auth')
 @Controller('auth')

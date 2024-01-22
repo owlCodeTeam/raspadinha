@@ -1,7 +1,7 @@
-import { RegisterGatewayLocal } from '@modules/Auth/infra/Register/gateway/registerGatewayLocal.local';
+import { RegisterGatewayLocal } from '@modules/Auth/infra/user/Register/gateway/registerGatewayLocal.local';
 import { userRepositoryInterface } from '../userRepositoryInterface.interface';
 import { userEntity } from '../entity/userEntity.entity';
-import { apiError } from '../../../../../http/helpers/api-Error.helper';
+import { apiError } from '../../../../../../http/helpers/api-Error.helper';
 import { randomUUID } from 'crypto';
 import { RegisterEmailQueueInterface } from '../RegisterEmailQueue.queue.interface';
 

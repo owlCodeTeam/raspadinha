@@ -1,7 +1,7 @@
-import { userRepositoryInterface } from '@modules/Auth/core/Register/userRepositoryInterface.interface';
-import { emailOptions } from '@modules/Auth/core/Register/RegisterEmailQueue.queue.interface';
+import { userRepositoryInterface } from '@modules/Auth/core/user/Register/userRepositoryInterface.interface';
+import { emailOptions } from '@modules/Auth/core/user/Register/RegisterEmailQueue.queue.interface';
 import * as amqplib from 'amqplib';
-import { RegisterEmailQueueInterface } from '@modules/Auth/core/Register/RegisterEmailQueue.queue.interface';
+import { RegisterEmailQueueInterface } from '@modules/Auth/core/user/Register/RegisterEmailQueue.queue.interface';
 export class RegisterEmailQueue implements RegisterEmailQueueInterface {
   private exchangeName = 'emails';
 

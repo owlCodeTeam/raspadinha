@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
-import { RegisterEmailQueue } from '@modules/Auth/infra/Register/queue/registerEmailQueue.rabbitmq';
+import { RegisterEmailQueue } from '@modules/Auth/infra/user/Register/queue/registerEmailQueue.rabbitmq';
 require('dotenv').config();
 import * as amqplib from 'amqplib';
-import { RegisterRpositoryTypeOrm } from '@modules/Auth/infra/Register/repository/registerRepositoryTypeOrm.orm';
+import { RegisterRpositoryTypeOrm } from '@modules/Auth/infra/user/Register/repository/registerRepositoryTypeOrm.orm';
 import { rejects } from 'assert';
 import { getDataSourceToken } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { RegisterGatewayLocal } from '@modules/Auth/infra/Register/gateway/registerGatewayLocal.local';
+import { RegisterGatewayLocal } from '@modules/Auth/infra/user/Register/gateway/registerGatewayLocal.local';
 import { ConsumeEmailService } from './consumeEmailsService.service';
 
 @Module({

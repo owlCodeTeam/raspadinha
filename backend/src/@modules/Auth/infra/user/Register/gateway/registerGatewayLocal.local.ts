@@ -1,9 +1,9 @@
-import { userGatewayInterface } from '@modules/Auth/core/Register/userGatewayInterface.interface';
+import { userGatewayInterface } from '@modules/Auth/core/user/Register/userGatewayInterface.interface';
 import { DataSource } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
-import { userEntity } from '@modules/Auth/core/Register/entity/userEntity.entity';
-import { apiError } from '../../../../../http/helpers/api-Error.helper';
+import { userEntity } from '@modules/Auth/core/user/Register/entity/userEntity.entity';
+import { apiError } from '../../../../../../http/helpers/api-Error.helper';
 const segredo = '3cba50ad-324e-4f26-9bb9-3304bfc2c30e';
 
 export class RegisterGatewayLocal implements userGatewayInterface {
