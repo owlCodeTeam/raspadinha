@@ -1,8 +1,6 @@
 <template>
   <div>
-    <QrcodeStream 
-      @detect="onDecode"
-    ></QrcodeStream>
+    <QrcodeStream :track="paintBoundingBox" @detect="onDecode"></QrcodeStream>
   </div>
 </template>
 
@@ -19,8 +17,21 @@ export default defineComponent({
       console.log(data)
     }
 
+    function paintBoundingBox(detectedCodes, ctx) {
+      for (const detectedCode of detectedCodes) {
+        const {
+          boundingBox: { x, y, width, height }
+        } = detectedCode
+
+        ctx.lineWidth = 2
+        ctx.strokeStyle = '#007bff'
+        ctx.strokeRect(x, y, width, height)
+      }
+    }
+
     return {
-      onDecode
+      onDecode,
+      paintBoundingBox
     }
   }
 });
