@@ -22,9 +22,8 @@ export default defineComponent({
         const {
           boundingBox: { x, y, width, height }
         } = detectedCode
-
         ctx.lineWidth = 2
-        ctx.strokeStyle = '#007bff'
+        ctx.strokeStyle = '#219D01'
         ctx.strokeRect(x, y, width, height)
       }
     }

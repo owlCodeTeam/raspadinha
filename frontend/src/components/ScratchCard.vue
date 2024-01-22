@@ -1,7 +1,7 @@
 <template>
-  <div style="width: 300px; height: 300px; display: block; margin: 0 auto;">
+  <div :style="{ width: `${data.widthScratch}px`, height: `${data.heightScratch}px`, display: 'block', margin: '0 auto' }">
     <div 
-      class="bg-red scratch-card-container"
+      class="scratch-card-container"
       id="scratch-card"
     >
     </div>
@@ -9,43 +9,49 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
-import {ScratchCard, SCRATCH_TYPE} from 'scratchcard-js'
-import frontScratchCardImage from '../../public/assets/front-scratch-card.jpeg'
+import { defineComponent, onMounted } from "vue"
+import {ScratchCard, SCRATCH_TYPE} from "scratchcard-js"
+import frontScratchCardImage from "../../public/assets/front-scratch-card.jpeg"
 
 export default defineComponent({
-  name: 'ScratchCard',
+  name: "ScratchCard",
   setup() {
-    onMounted(() => {
-      const scratchCard = document.getElementById('scratch-card')
+    const data = {
+      widthScratch: 300,
+      heightScratch: 300
+    }
 
+    onMounted(() => {
       const scratch = new ScratchCard("#scratch-card", {
         scratchType: SCRATCH_TYPE.LINE,
-        containerWidth: 300,
-        containerHeight: 300,
+        containerWidth: data.widthScratch,
+        containerHeight: data.heightScratch,
         imageForwardSrc: frontScratchCardImage,
-        imageBackgroundSrc: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg',
-        brushSrc: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg',
-        clearZoneRadius: 30,
+        imageBackgroundSrc: "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg",
+        brushSrc: "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg",
+        clearZoneRadius: 25,
         nPoints: 0,
         pointSize: 0,
         percentToFinish: 70,
         enabledPercentUpdate: true,
-        htmlBackground: '',
+        htmlBackground: "",
         callback: () => {
-          console.log('aa')
+          return
         }
       })
-      
       scratch.init().then(() => {
       scratch.canvas.addEventListener('scratch.move', () => {
-        let percent = scratch.getPercent().toFixed(2)
-        console.log(percent)
+        let percent = scratch.getPercent().toFixed(0)
+        console.log(percent+"%")
       })
       }).catch((error) => {
         console.log(error.message)
       })
     })
+
+    return {
+      data
+    }
   }
 })
 </script>
